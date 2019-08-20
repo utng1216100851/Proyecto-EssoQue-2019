@@ -1,0 +1,18 @@
+<div *ngIf="producto" class="artist-box">
+
+        <div id="artist-head-card">
+            <div class="image">
+                    <img src="{{url + 'get-image-producto/' + producto.image}}" *ngIf="producto.image && producto.image != 'null'" />
+            </div>
+            <div class="data">
+                <h1>{{producto.name}}</h1>
+                <h3>Precio: {{'$'+producto.precio}}</h3>
+                <p class="description">Descripcion: {{''+producto.description}}</p>
+                
+            </div>
+        </div>
+        <a [routerLink]="['/productos', 1]" [routerLinkActive]="['actived']"  class="btn btn-default" style="text-align: center">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            Regresar
+        </a>
+    </div>

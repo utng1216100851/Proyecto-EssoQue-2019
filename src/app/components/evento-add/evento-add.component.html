@@ -1,0 +1,72 @@
+<div class="col-lg-6" *ngIf="identity && identity.role == 'ROLE_ADMIN'">
+    <h1>{{titulo}}</h1>
+    <div *ngIf="alertMessage">
+        <div class="alert alert-success" role="alert">
+        {{alertMessage}}
+        </div>
+    </div>
+
+    <form #formEvento="ngForm" (ngSubmit)="onSubmit()" >
+        <p>
+            <label>Lugar</label>
+            <input type="text" #lugar="ngModel" name="lugar" [(ngModel)]="evento.lugar" required 
+            class="form-control">
+            <span *ngIf="!lugar.valid && lugar.touched">
+                El lugar es obligatorio
+            </span>
+        </p>
+        <p>
+            <label>Tipo</label>
+
+            <select #tipo="ngModel" name="tipo" [(ngModel)]="evento.tipo" required 
+            class="form-control">
+                <option value="Privado">Privado</option> 
+                <option value="Publico">Publico</option> 
+                <span *ngIf="!tipo.valid && tipo.touched">
+                    El tipo es obligatorio
+                </span>
+            </select>
+<!--
+            <input type="text" #tipo="ngModel" name="tipo" [(ngModel)]="evento.tipo" required 
+            class="form-control">
+            <span *ngIf="!tipo.valid && tipo.touched">
+                El tipo es obligatorio
+            </span>
+            -->
+        </p>
+        <p>
+            <label>Descripción</label>
+            <textarea #descripcion="ngModel" name="descripcion" [(ngModel)]="evento.descripcion" required
+            class="form-control"></textarea>
+            <span *ngIf="!descripcion.valid && descripcion.touched">
+                La descripción es obligatorio
+            </span>
+        </p>
+        <p>
+            <label>Fecha</label>
+            <input type="date" #fecha="ngModel" name="fecha" [(ngModel)]="evento.fecha" required 
+            class="form-control">
+            <span *ngIf="!fecha.valid && fecha.touched">
+                El tipo es obligatorio
+            </span>
+        </p>
+        
+
+       <!--<div *ngIf="is_edit">
+            <div class="artist_image_for_edit" *ngIf="artist.image && artist.image != null">
+                <img src="{{url + 'get-image-artist/' + artist.image}}">
+            </div>    
+            <p>
+                <label>Sube la imagen del artista</label>
+                <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)" />
+            </p>
+        </div>--> 
+        <input type="submit" value="{{titulo}}" [disabled]="!formEvento.form.valid" 
+        class="btn-success"/>
+    </form>
+</div>
+
+<div class="col-lg-6" *ngIf="!identity || identity.role != 'ROLE_ADMIN'">
+    <h1>Error</h1>
+    <p>No tienes acceso a esta parte de la aplicaión</p>
+</div>
